@@ -2,6 +2,11 @@ package entity
 
 import "errors"
 
+const (
+	APPROVED = "approved"
+	REJECTED = "rejected"
+)
+
 type Transaction struct {
 	ID           string
 	AccountID    string
