@@ -10,8 +10,7 @@ import (
 )
 
 func Up(migrationsDir fs.FS) *sql.DB {
-	db, err := sql.Open("sqlite3", ":memory")
-	defer db.Close()
+	db, err := sql.Open("sqlite3", ":memory:")
 
 	if err != nil {
 		log.Fatal(err)
@@ -28,5 +27,5 @@ func Down(db *sql.DB, migrationsDir fs.FS) {
 	if err := migrate.Down(context.Background(), db, migrationsDir); err != nil {
 		panic(err)
 	}
-	defer db.Close()
+		db.Close()
 }
