@@ -1,7 +1,7 @@
 package processtransaction
 
 import (
-	"fmt"
+	"errors"
 
 	"github.com/odanaraujo/golang/clean-architecture/entity"
 )
@@ -33,11 +33,12 @@ func (p *ProcessTransaction) Execute(input TransactionDtoInput) (TransactionDtoO
 		output.ErrorMessage = invalidTransaction.Error()
 	}
 
-	fmt.Println("Exemplo de Dan", output.ErrorMessage)
-	fmt.Println("Exemplo de Dan", transaction.Status)
-
 	if err := p.Repository.Insert(transaction.ID, transaction.AccountID, transaction.Amount, output.Status, output.ErrorMessage); err != nil {
 		return TransactionDtoOutput{}, err
+	}
+
+	if output.ErrorMessage != "" {
+		return output, errors.New(output.ErrorMessage)
 	}
 
 	return output, nil

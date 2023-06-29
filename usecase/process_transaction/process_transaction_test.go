@@ -58,7 +58,7 @@ func TestProcessTransactionWhenDontsValid(t *testing.T) {
 	usecase := NewProcessTransaction(repositoryMock)
 	output, err := usecase.Execute(input)
 
-	assert.Nil(t, err)
+	assert.Error(t, err)
 	assert.Equal(t, expectedOutput, output)
 
 }

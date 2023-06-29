@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/golang/mock v1.6.0
+	github.com/maragudk/migrate v0.4.3
 	github.com/stretchr/testify v1.8.4
 )
 

@@ -1,0 +1,15 @@
+package repository
+
+import "testing"
+
+func TestTransactionalRepositoryDB_Insert(t *testing.T) {
+	migrationDir := os.DirFS("fixture/sql")
+	db := fixture.Up(migrationDir)
+	defer fixture.Down(db, migrationDir)
+
+	repository := NewTransactionRepositoryDB(db)
+
+	err := repository.Insert("1", "1", 3, entity.APPROVED, "")
+
+	assert.Nil(t, err)
+}
