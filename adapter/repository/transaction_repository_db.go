@@ -16,7 +16,7 @@ func NewTransactionRepositoryDB(db *sql.DB) *TransactionalRepositoryDb {
 func (repo *TransactionalRepositoryDb) Insert(id string, account_id string, amount float64, status string, errorMessage string) error {
 
 	stmt, err := repo.db.Prepare(`
-		Insert into transaction(id, account_id, amount, status, error_message, created_at, updated_at)
+		Insert into transactions(id, account_id, amount, status, error_message, created_at, updated_at)
 		values($1, $2, $3, $4, $5, $6, $7)
 		`)
 
