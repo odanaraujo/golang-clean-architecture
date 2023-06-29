@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"time"
 )
 
 type TransactionalRepositoryDb struct {
@@ -18,5 +19,20 @@ func (repo *TransactionalRepositoryDb) Insert(id string,
 	status string,
 	errorMessage string) error {
 
-	stmt, err := repo.db.
+	stmt, err := repo.db.Prepare(`
+		Insert into transaction(id, account_id, amount, status, errorMessage, created_at, updated_at)
+		values($1, $2, $3, $4, $5, $6, $7)
+		`)
+
+	if err != nil {
+		return err
+	}
+
+	_, err = stmt.Exec(id, accountId, amount, status, errorMessage, time.Now(), time.Now())
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

@@ -1,6 +1,13 @@
 package repository
 
-import "testing"
+import (
+	_ "github.com/mattn/go-sqlite3"
+	"github.com/odanaraujo/golang/clean-architecture/adapter/repository/fixture"
+	"github.com/odanaraujo/golang/clean-architecture/entity"
+	"github.com/stretchr/testify/assert"
+	"os"
+	"testing"
+)
 
 func TestTransactionalRepositoryDB_Insert(t *testing.T) {
 	migrationDir := os.DirFS("fixture/sql")

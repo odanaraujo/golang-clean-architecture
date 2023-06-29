@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestProcessTransactionWhenItsValid(t *testing.T) {
+func TestProcessTransactionWhenItsValid(test *testing.T) {
 	input := TransactionDtoInput{
 		ID:        "1",
 		AccountID: "1",
@@ -22,7 +22,7 @@ func TestProcessTransactionWhenItsValid(t *testing.T) {
 		ErrorMessage: "",
 	}
 
-	ctrl := gomock.NewController(t)
+	ctrl := gomock.NewController(test)
 	defer ctrl.Finish()
 
 	repositoryMock := mock_entity.NewMockTransactionRepository(ctrl)
@@ -31,8 +31,8 @@ func TestProcessTransactionWhenItsValid(t *testing.T) {
 	usecase := NewProcessTransaction(repositoryMock)
 	output, err := usecase.Execute(input)
 
-	assert.Nil(t, err)
-	assert.Equal(t, expectedOutput, output)
+	assert.Nil(test, err)
+	assert.Equal(test, expectedOutput, output)
 
 }
 
