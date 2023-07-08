@@ -7,10 +7,13 @@ import (
 )
 
 func TestTransactionWithAmountGreaterThan100(t *testing.T) {
-	transaction := NewTransaction()
-	transaction.ID = "1"
-	transaction.AccountID = "1"
-	transaction.Amount = 2000
+
+	tt := Transaction{}
+	tt.ID = "1"
+	tt.AccountID = "1"
+	tt.Amount = 2000
+
+	transaction := tt.NewTransaction()
 
 	err := transaction.IsValid()
 	assert.Error(t, err)
@@ -18,10 +21,12 @@ func TestTransactionWithAmountGreaterThan100(t *testing.T) {
 }
 
 func TestTransactionWithAmountLesserThan1(t *testing.T) {
-	transaction := NewTransaction()
-	transaction.ID = "1"
-	transaction.AccountID = "1"
-	transaction.Amount = 0
+	tt := Transaction{}
+	tt.ID = "1"
+	tt.AccountID = "1"
+	tt.Amount = 0
+
+	transaction := tt.NewTransaction()
 
 	err := transaction.IsValid()
 	assert.Error(t, err)

@@ -16,11 +16,12 @@ func NewProcessTransaction(repository entity.TransactionRepository) *ProcessTran
 
 func (p *ProcessTransaction) Execute(input TransactionDtoInput) (TransactionDtoOutput, error) {
 
-	transaction := entity.NewTransaction()
+	transaction := entity.Transaction{}
 	transaction.ID = input.ID
 	transaction.AccountID = input.AccountID
 	transaction.Amount = input.Amount
 	transaction.Status = entity.APPROVED
+	transaction.NewTransaction()
 
 	output := TransactionDtoOutput{
 		ID:           transaction.ID,

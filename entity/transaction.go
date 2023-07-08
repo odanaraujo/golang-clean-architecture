@@ -1,6 +1,8 @@
 package entity
 
-import "errors"
+import (
+	"errors"
+)
 
 const (
 	APPROVED = "approved"
@@ -15,14 +17,13 @@ type Transaction struct {
 	ErrorMessage string
 }
 
-func NewTransaction() *Transaction {
-	// return &Transaction{
-	// 	ID:        transaction.ID,
-	// 	AccountID: transaction.AccountID,
-	// 	Amount:    transaction.Amount,
-	// 	Status:    transaction.Status,
-	// }
-	return &Transaction{}
+func (t *Transaction) NewTransaction() *Transaction {
+	return &Transaction{
+		ID:        t.ID,
+		AccountID: t.AccountID,
+		Amount:    t.Amount,
+		Status:    t.Status,
+	}
 }
 
 func (t *Transaction) IsValid() error {
